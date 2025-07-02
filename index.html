@@ -316,7 +316,7 @@
         ✨ Premium Design Packages<br/>
         🚀 Fast Turnaround & Quality<br/>
         🎨 Custom Aesthetic Solutions<br/>
-        💬 DM me for quotes & collabs!
+        💬 Contact me for quotes & collabs!
         <img src="images/welcome.png" alt="Promo Image" />
       </div>
     </div>
@@ -385,7 +385,7 @@
     <form onsubmit="event.preventDefault(); showConfirmation();">
       <input type="text" name="Name" placeholder="Your Name" required />
       <input type="email" name="Email" placeholder="Your Email" required />
-      <textarea rows="5" name="message" placeholder="Your Message / Order Details" required></textarea>
+      <textarea rows="5" name="Message" placeholder="Your Message / Order Details" required></textarea>
       <button type="submit">Send Message</button>
     </form>
     <div id="confirmationMessage">You will be contacted soon by Kashyap. Thank you for reaching out!</div>
@@ -406,6 +406,34 @@
       const menu = document.getElementById('navMenu');
       menu.classList.remove('show');
       document.body.classList.remove('noscroll');
+      const scriptURL =                       
+      "https://script.google.com/macros/s/AKfycbxyv4ijv7azb3Me-hWfx3LJM9CHdPaNhCSzFHZL7SngfXI67LnJR7vhK2bKgHH43W8IyA/exec";
+      const form = document.forms["submit-to-google-sheet"];
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        var formData = new FormData(form);
+        var ex = document.getElementById("ex").checked;
+        var age = document.getElementById("age").checked;
+
+        if (age) {
+          formData.append("age", "Yes");
+        } else {
+          formData.append("age", "No");
+        }
+        if (ex) {
+          formData.append("ex", "Yes");
+        } else {
+          formData.append("ex", "No");
+        }
+
+        fetch(scriptURL, { method: "POST", body: formData })
+          .then((response) => {
+            swal("Done", "Submitted Successfully.", "success");
+          })
+          .catch((error) => {
+            swal("Error", "Something went wrong. please try again!", "error");
+          });
+      });
     }
   </script>
 </body>
