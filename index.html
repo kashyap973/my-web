@@ -289,19 +289,6 @@
       border-top: 3px solid #a68a64;
     }
   </style>
-
-  <script>
-    function toggleMenu() {
-      const menu = document.getElementById('navMenu');
-      const isOpen = menu.classList.toggle('show');
-      document.body.classList.toggle('noscroll', isOpen);
-    }
-
-    function closeMenu() {
-      document.getElementById('navMenu').classList.remove('show');
-      document.body.classList.remove('noscroll');
-    }
-  </script>
 </head>
 <body>
   <nav class="topbar">
@@ -395,45 +382,25 @@
     <p>&copy; 2025 Kashyap Raj Gupta. All Rights Reserved.</p>
   </footer>
 
+  <!-- SweetAlert CDN -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <script>
     function toggleMenu() {
       const menu = document.getElementById('navMenu');
-      menu.classList.toggle('show');
-      document.body.classList.toggle('noscroll');
+      const isOpen = menu.classList.toggle('show');
+      document.body.classList.toggle('noscroll', isOpen);
     }
 
     function closeMenu() {
       const menu = document.getElementById('navMenu');
       menu.classList.remove('show');
       document.body.classList.remove('noscroll');
-      const scriptURL =                       
-      "https://script.google.com/macros/s/AKfycbxYfguQlabR-xUYNt0jssdzQVMy-UqXy6zYofZQUzgrOj9orpSxgq2LElFrUnAJN7nw/exec;
-      const form = document.forms["submit-to-google-sheet"];
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        var formData = new FormData(form);
-        var ex = document.getElementById("ex").checked;
-        var age = document.getElementById("age").checked;
+    }
 
-        if (age) {
-          formData.append("age", "Yes");
-        } else {
-          formData.append("age", "No");
-        }
-        if (ex) {
-          formData.append("ex", "Yes");
-        } else {
-          formData.append("ex", "No");
-        }
-
-        fetch(scriptURL, { method: "POST", body: formData })
-          .then((response) => {
-            swal("Done", "Submitted Successfully.", "success");
-          })
-          .catch((error) => {
-            swal("Error", "Something went wrong. please try again!", "error");
-          });
-      });
+    function showConfirmation() {
+      document.getElementById("confirmationMessage").style.display = "block";
+      swal("Thank you for contacting!", "I will reach out to you soon.", "success");
     }
   </script>
 </body>
